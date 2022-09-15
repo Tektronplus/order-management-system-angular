@@ -11,18 +11,75 @@ export class FormOrderComponent implements OnInit {
   ngOnInit(): void {}
 
   /* VARIABLES */
+  mainOrderArray = [];
+
   isTakeAway: boolean = false;
+
+  numberTable: string = '';
+  firstNameClient: string = '';
+  lastNameClient: string = '';
+  addressClient: string = '';
+  phoneNumberClient: string = '';
+
+  orderPizzaFormDB: Array<[string, number, number]> = [['Pizza', 0, 0]];
 
   /* SETTERS & GETTERS  */
   setIsTakeAway = () => (this.isTakeAway = !this.isTakeAway);
+  setNumberTable = (e) => (this.numberTable = e.target.value);
+  setFirstNameClient = (e) => (this.firstNameClient = e.target.value);
+  setLastNameClient = (e) => (this.lastNameClient = e.target.value);
+  setAddressClient = (e) => (this.addressClient = e.target.value);
+  setPhoneNumberClient = (e) => (this.phoneNumberClient = e.target.value);
 
   /* METHODS */
+
+  //Data Client methods
+
+  //Pizza Order Methods
   addOrderForm() {
-    this.ordersFormDB.push(['Margherita', 1, 1]); //TEST
+    this.orderPizzaFormDB.push(['Pizza', 0, 0]); //TEST
   }
 
   deleteOrderForm(index: number) {
-    this.ordersFormDB.splice(index, 1);
+    this.orderPizzaFormDB.splice(index, 1);
+  }
+
+  changePizza(e, index) {
+    let pizzaName = e.target[e.target.options.selectedIndex].text;
+    let pizzaPrice = parseFloat(e.target.value);
+
+    this.orderPizzaFormDB[index][0] = pizzaName;
+    this.orderPizzaFormDB[index][1] = pizzaPrice;
+  }
+  changeQuantity(e, index) {
+    let pizzaQuantity = e.target.value;
+
+    this.orderPizzaFormDB[index][2] = pizzaQuantity;
+  }
+
+  //Send Order
+  sendOrder() {
+    if (this.isTakeAway) {
+      this.mainOrderArray.push([
+        this.firstNameClient,
+        this.lastNameClient,
+        this.addressClient,
+        this.phoneNumberClient,
+        this.orderPizzaFormDB,
+      ]);
+    } else {
+      this.mainOrderArray.push([this.numberTable, this.orderPizzaFormDB]);
+    }
+    console.log(this.mainOrderArray);
+  }
+
+  //Test Methods
+  printTest() {
+    console.log(this.orderPizzaFormDB);
+    console.log(this.firstNameClient);
+    console.log(this.lastNameClient);
+    console.log(this.addressClient);
+    console.log(this.phoneNumberClient);
   }
 
   /* PLACEHOLDER DATABASE */
@@ -58,5 +115,4 @@ export class FormOrderComponent implements OnInit {
     ['Monzese', 4.9],
     ['Ananas', 10.9],
   ];
-  ordersFormDB: Array<[string, number, number]> = [['Margherita', 1, 1]];
 }
