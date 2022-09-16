@@ -11,7 +11,7 @@ export class FormOrderComponent implements OnInit {
 	ngOnInit(): void {}
 
 	/* VARIABLES */
-	mainOrderArray = [];
+	mainOrderArray = []; //Array that will contain the final order
 
 	isTakeAway: boolean = false;
 
@@ -21,9 +21,9 @@ export class FormOrderComponent implements OnInit {
 	addressClient: string = '';
 	phoneNumberClient: string = '';
 
-	orderPizzaFormDB: Array<[string, number, number]> = [['Pizza', 0, 0]];
+	orderPizzaFormDB: Array<[string, number, number]> = [['Pizza', 0, 0]]; //Array that will contain the details of the pizza ordered
 
-	/* SETTERS & GETTERS  */
+	/* SETTERS */
 	setIsTakeAway = () => (this.isTakeAway = !this.isTakeAway);
 	setNumberTable = (e) => (this.numberTable = e.target.value);
 	setFirstNameClient = (e) => (this.firstNameClient = e.target.value);
@@ -33,9 +33,11 @@ export class FormOrderComponent implements OnInit {
 
 	/* METHODS */
 
-	//Data Client methods
-
-	//Pizza Order Methods
+	/*
+		Pizza Order methods:
+		Some methods of the pizza order form, like add new pizza in the order,
+		delete pizza from the order, change pizza type, price and quantity.
+	*/
 	addOrderForm() {
 		this.orderPizzaFormDB.push(['Pizza', 0, 0]); //TEST
 	}
@@ -57,7 +59,10 @@ export class FormOrderComponent implements OnInit {
 		this.orderPizzaFormDB[index][2] = pizzaQuantity;
 	}
 
-	//Send Order
+	/*
+		sendOrder(): The method push the data of the form, in two ways, depend on the state
+		of "isTakeAway".
+	*/
 	sendOrder() {
 		if (this.isTakeAway) {
 			this.mainOrderArray.push([
@@ -70,19 +75,12 @@ export class FormOrderComponent implements OnInit {
 		} else {
 			this.mainOrderArray.push([this.numberTable, this.orderPizzaFormDB]);
 		}
-		console.log(this.mainOrderArray);
 	}
 
-	//Test Methods
-	printTest() {
-		console.log(this.orderPizzaFormDB);
-		console.log(this.firstNameClient);
-		console.log(this.lastNameClient);
-		console.log(this.addressClient);
-		console.log(this.phoneNumberClient);
-	}
-
-	/* PLACEHOLDER DATABASE */
+	/* 
+		PLACEHOLDER DATABASE: 
+		these are the fake data to use during development
+	*/
 	tablesDB: string[] = [
 		'n°01',
 		'n°02',
