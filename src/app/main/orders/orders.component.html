@@ -1,60 +1,103 @@
 <div>
+	<div
+		*ngFor="let order of listOfOrders"
+		class="card"
+		style="width: 18rem">
+		<div class="card-header">Order #{{ order.id }}</div>
+
+		<!-- Data of client -->
+		<div *ngIf="isInstanceOfLocalOrder(order); else isTakeAwayOrder">
+			<ul class="list-group">
+				<li class="list-group-item">Table: {{ order.numberTable }}</li>
+			</ul>
+		</div>
+		<ng-template #isTakeAwayOrder>
+			<ul class="list-group">
+				<li class="list-group-item">First name: {{ order.firstNameClient }}</li>
+				<li class="list-group-item">Last name: {{ order.lastNameClient }}</li>
+				<li class="list-group-item">Address: {{ order.addressClient }}</li>
+				<li class="list-group-item">
+					Phone Number: {{ order.phoneNumberClient }}
+				</li>
+			</ul>
+		</ng-template>
+
+		<div>
+			<ul class="list-group">
+				<li
+					*ngFor="let pizza of order.pizzasOrdered"
+					class="list-group-item">
+					{{ pizza[0] }} {{ pizza[1] }}€ n°{{ pizza[2] }}
+				</li>
+			</ul>
+		</div>
+
+		<div>
+			<button
+				type="button"
+				class="btn btn-primary">
+				Status
+			</button>
+			<button
+				type="button"
+				class="btn btn-outline-danger">
+				Delete
+			</button>
+		</div>
+	</div>
+</div>
+<!--
+<div>
 	<div *ngFor="let order of listOfOrders">
-		<div *ngIf="order.length == 3; else isTakeAwayOrder">
+		<div *ngIf="isInstanceOfLocalOrder(order); else isTakeAwayOrder">
 			<div
 				class="card"
 				style="width: 18rem">
-				<div class="card-header">Order #{{ order[0] }}</div>
+				<div class="card-header">Order #{{ order.id }}</div>
 				<div class="card-body">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Table: {{ order[1] }}</li>
+						<li class="list-group-item">Table: {{ order.numberTable }}</li>
 					</ul>
 					<hr />
-					<div
-						class="btn-group"
-						role="group">
-						<input
-							type="radio"
-							class="btn-check"
-							name="btnradio{{ order[0] }}"
-							id="btnradio1{{ order[0] }}"
-							autocomplete="off"
-							checked />
-						<label
-							class="btn btn-outline-primary"
-							for="btnradio1{{ order[0] }}"
-							>Radio 1</label
-						>
-
-						<input
-							type="radio"
-							class="btn-check"
-							name="btnradio{{ order[0] }}"
-							id="btnradio2{{ order[0] }}"
-							autocomplete="off" />
-						<label
-							class="btn btn-outline-primary"
-							for="btnradio2{{ order[0] }}"
-							>Radio 2</label
-						>
-
-						<input
-							type="radio"
-							class="btn-check"
-							name="btnradio{{ order[0] }}"
-							id="btnradio3{{ order[0] }}"
-							autocomplete="off" />
-						<label
-							class="btn btn-outline-primary"
-							for="btnradio3{{ order[0] }}"
-							>Radio 3</label
-						>
+					<div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<ng-template #isTakeAwayOrder>
-			<p>Is TakeAway Order: {{ order }}</p>
+			<div
+				class="card"
+				style="width: 18rem">
+				<div class="card-header">Order #{{ order.id }}</div>
+				<div class="card-body">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							First name: {{ order.firstNameClient }}
+						</li>
+						<li class="list-group-item">
+							Last name: {{ order.lastNameClient }}
+						</li>
+						<li class="list-group-item">Address: {{ order.addressClient }}</li>
+						<li class="list-group-item">
+							Phone number: {{ order.phoneNumber }}
+						</li>
+					</ul>
+					<hr />
+					<div>
+						<button
+							type="button"
+							class="btn btn-primary">
+							Status
+						</button>
+						<button
+							type="button"
+							class="btn btn-outline-danger">
+							Delete
+						</button>
+					</div>
+				</div>
+			</div>
 		</ng-template>
 	</div>
 </div>
+-->

@@ -1,4 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { LocalOrder } from '../form-order/localOrder';
+import { TakeAwayOrder } from '../form-order/takeawayOrder';
 
 @Component({
 	selector: 'app-orders',
@@ -6,7 +8,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 	styleUrls: ['./orders.component.css'],
 })
 export class OrdersComponent implements OnInit, OnChanges {
-	@Input() newOrder;
+	@Input() newOrder: object = null;
 
 	constructor() {}
 
@@ -15,9 +17,13 @@ export class OrdersComponent implements OnInit, OnChanges {
 	/* GETTING DATA */
 	listOfOrders = [];
 	ngOnChanges() {
-		if (this.newOrder.length != 0) {
+		if (Object.keys(this.newOrder).length != 0) {
 			this.listOfOrders.push(this.newOrder);
 		}
 		console.log(this.listOfOrders);
+	}
+
+	isInstanceOfLocalOrder(x): boolean {
+		return x instanceof LocalOrder;
 	}
 }

@@ -89,6 +89,7 @@ export class FormOrderComponent implements OnInit {
 			window.alert('Order form incomplete!');
 		}
 	}
+
 	checkCompleteForm(): boolean {
 		let isCompleteForm = false;
 		if (this.isTakeAway) {
@@ -106,6 +107,8 @@ export class FormOrderComponent implements OnInit {
 		}
 		return isCompleteForm;
 	}
+
+	//Check array of ordered pizzas list if has some invalid fields
 	checkOrderedPizzasList(): boolean {
 		let isListIncorrect = false;
 		for (let order of this.orderedPizzasList) {
