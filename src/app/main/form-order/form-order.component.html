@@ -1,5 +1,5 @@
 <!-- FORM ORDER -->
-<div class="container-form">
+<div class="container-form border border-light rounded-3 bg-white shadow p-3">
 	<div>
 		<!-- 
             Switch toggle:
@@ -40,33 +40,35 @@
 
 		<!--Take-away order-->
 		<ng-template #isTakeAwayComponent>
-			<div>
-				<input
-					type="text"
-					class="form-control"
-					placeholder="First name"
-					(change)="setFirstNameClient($event)" />
-			</div>
-			<div>
-				<input
-					type="text"
-					class="form-control"
-					placeholder="Last name"
-					(change)="setLastNameClient($event)" />
-			</div>
-			<div>
-				<input
-					type="text"
-					class="form-control"
-					placeholder="Address"
-					(change)="setAddressClient($event)" />
-			</div>
-			<div>
-				<input
-					type="text"
-					class="form-control"
-					placeholder="Phone number"
-					(change)="setPhoneNumberClient($event)" />
+			<div class="container-client-data">
+				<div>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="First name"
+						(change)="setFirstNameClient($event)" />
+				</div>
+				<div>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Last name"
+						(change)="setLastNameClient($event)" />
+				</div>
+				<div>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Address"
+						(change)="setAddressClient($event)" />
+				</div>
+				<div>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Phone number"
+						(change)="setPhoneNumberClient($event)" />
+				</div>
 			</div>
 		</ng-template>
 	</div>
@@ -79,14 +81,18 @@
 			type="button"
 			class="btn btn-primary"
 			(click)="addOrderForm()">
-			Add
+			Add pizza
 		</button>
 
 		<!--Add new field for pizza information-->
-		<div *ngFor="let orderForm of orderPizzaFormDB; let indexOrderForm = index">
+		<div
+			id="order-pizza"
+			class="my-3"
+			*ngFor="let orderForm of orderPizzaFormDB; let indexOrderForm = index">
 			<!--List of pizzas-->
 			<select
 				class="form-select"
+				style="grid-area: select-pizza"
 				(change)="changePizza($event, indexOrderForm)">
 				<option selected>Select pizza</option>
 				<option
@@ -98,6 +104,7 @@
 
 			<!--Quantity of pizza-->
 			<input
+				style="grid-area: quantity-pizza"
 				type="number"
 				min="1"
 				max="10"
@@ -106,8 +113,9 @@
 
 			<!--Delete pizza from order-->
 			<button
+				style="grid-area: delete-pizza"
 				type="button"
-				class="btn btn-danger"
+				class="btn btn-outline-danger"
 				(click)="deleteOrderForm(indexOrderForm)">
 				Delete
 			</button>
@@ -124,5 +132,3 @@
 		</button>
 	</div>
 </div>
-
-<button (click)="printTest()">TEST BUTTON</button>

@@ -1,3 +1,19 @@
 .container-form {
-  width: 80%;
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.container-client-data {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+#order-pizza {
+	max-width: 500px;
+
+	display: grid;
+	grid-template-columns: 7fr 1fr 2fr;
+	grid-template-areas: "select-pizza quantity-pizza delete-pizza";
+	gap: 0px 20px;
 }
