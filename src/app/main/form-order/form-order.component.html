@@ -46,28 +46,32 @@
 						type="text"
 						class="form-control"
 						placeholder="First name"
-						(change)="setFirstNameClient($event)" />
+						(change)="setFirstNameClient($event)"
+						[value]="firstNameClient" />
 				</div>
 				<div>
 					<input
 						type="text"
 						class="form-control"
 						placeholder="Last name"
-						(change)="setLastNameClient($event)" />
+						(change)="setLastNameClient($event)"
+						[value]="lastNameClient" />
 				</div>
 				<div>
 					<input
 						type="text"
 						class="form-control"
 						placeholder="Address"
-						(change)="setAddressClient($event)" />
+						(change)="setAddressClient($event)"
+						[value]="addressClient" />
 				</div>
 				<div>
 					<input
 						type="text"
 						class="form-control"
 						placeholder="Phone number"
-						(change)="setPhoneNumberClient($event)" />
+						(change)="setPhoneNumberClient($event)"
+						[value]="phoneNumberClient" />
 				</div>
 			</div>
 		</ng-template>
@@ -88,7 +92,7 @@
 		<div
 			id="order-pizza"
 			class="my-3"
-			*ngFor="let orderForm of orderPizzaFormDB; let indexOrderForm = index">
+			*ngFor="let orderForm of orderedPizzasList; let indexOrderForm = index">
 			<!--List of pizzas-->
 			<select
 				class="form-select"

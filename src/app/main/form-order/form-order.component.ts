@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { LocalOrder } from './localOrder';
+import { TakeAwayOrder } from './takeawayOrder';
 
 @Component({
 	selector: 'app-form-order',
@@ -6,22 +8,20 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./form-order.component.css'],
 })
 export class FormOrderComponent implements OnInit {
-	constructor() {}
+	@Output() orderForm = new EventEmitter(); //To send data to Parent
 
+	constructor() {}
 	ngOnInit(): void {}
 
 	/* VARIABLES */
-	mainOrderArray = []; //Array that will contain the final order
-
 	isTakeAway: boolean = false;
-
+	orderID: number = 0;
 	numberTable: string = '';
 	firstNameClient: string = '';
 	lastNameClient: string = '';
 	addressClient: string = '';
 	phoneNumberClient: string = '';
-
-	orderPizzaFormDB: Array<[string, number, number]> = [['Pizza', 0, 0]]; //Array that will contain the details of the pizza ordered
+	orderedPizzasList: Array<[string, number, number]> = [['new Pizza', 0, 1]]; //Array that will contain the details of the pizza ordered
 
 	/* SETTERS */
 	setIsTakeAway = () => (this.isTakeAway = !this.isTakeAway);
@@ -39,24 +39,24 @@ export class FormOrderComponent implements OnInit {
 		delete pizza from the order, change pizza type, price and quantity.
 	*/
 	addOrderForm() {
-		this.orderPizzaFormDB.push(['Pizza', 0, 0]); //TEST
+		this.orderedPizzasList.push(['new Pizza', 0, 1]);
 	}
 
 	deleteOrderForm(index: number) {
-		this.orderPizzaFormDB.splice(index, 1);
+		this.orderedPizzasList.splice(index, 1);
 	}
 
 	changePizza(e, index) {
-		let pizzaName = e.target[e.target.options.selectedIndex].text;
-		let pizzaPrice = parseFloat(e.target.value);
+		let pizzaName = e.target[e.target.options.selectedIndex].text; //text of option tag
+		let pizzaPrice = parseFloat(e.target.value); //value of option tag
 
-		this.orderPizzaFormDB[index][0] = pizzaName;
-		this.orderPizzaFormDB[index][1] = pizzaPrice;
+		this.orderedPizzasList[index][0] = pizzaName;
+		this.orderedPizzasList[index][1] = pizzaPrice;
 	}
 	changeQuantity(e, index) {
-		let pizzaQuantity = e.target.value;
+		let pizzaQuantity = parseInt(e.target.value);
 
-		this.orderPizzaFormDB[index][2] = pizzaQuantity;
+		this.orderedPizzasList[index][2] = pizzaQuantity;
 	}
 
 	/*
@@ -64,17 +64,66 @@ export class FormOrderComponent implements OnInit {
 		of "isTakeAway".
 	*/
 	sendOrder() {
-		if (this.isTakeAway) {
-			this.mainOrderArray.push([
-				this.firstNameClient,
-				this.lastNameClient,
-				this.addressClient,
-				this.phoneNumberClient,
-				this.orderPizzaFormDB,
-			]);
+		let orderObj: object;
+		if (this.checkCompleteForm()) {
+			this.orderID++;
+			if (this.isTakeAway) {
+				orderObj = new TakeAwayOrder(
+					this.orderID,
+					this.firstNameClient,
+					this.lastNameClient,
+					this.addressClient,
+					this.phoneNumberClient,
+					this.orderedPizzasList
+				);
+			} else {
+				orderObj = new LocalOrder(
+					this.orderID,
+					this.numberTable,
+					this.orderedPizzasList
+				);
+			}
+			this.orderForm.emit(orderObj);
+			this.cleanForm();
 		} else {
-			this.mainOrderArray.push([this.numberTable, this.orderPizzaFormDB]);
+			window.alert('Order form incomplete!');
 		}
+	}
+	checkCompleteForm(): boolean {
+		let isCompleteForm = false;
+		if (this.isTakeAway) {
+			isCompleteForm =
+				this.firstNameClient == '' ||
+				this.lastNameClient == '' ||
+				this.addressClient == '' ||
+				this.phoneNumberClient == '' ||
+				this.checkOrderedPizzasList()
+					? false
+					: true;
+		} else {
+			isCompleteForm =
+				this.numberTable == '' || this.checkOrderedPizzasList() ? false : true;
+		}
+		return isCompleteForm;
+	}
+	checkOrderedPizzasList(): boolean {
+		let isListIncorrect = false;
+		for (let order of this.orderedPizzasList) {
+			isListIncorrect = order.includes('new Pizza');
+			if (isListIncorrect == true) {
+				break;
+			}
+		}
+		return isListIncorrect;
+	}
+
+	cleanForm() {
+		this.numberTable = '';
+		this.firstNameClient = '';
+		this.lastNameClient = '';
+		this.addressClient = '';
+		this.phoneNumberClient = '';
+		this.orderedPizzasList = [['new Pizza', 0, 1]];
 	}
 
 	/* 

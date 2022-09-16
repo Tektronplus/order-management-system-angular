@@ -1,0 +1,60 @@
+<div>
+	<div *ngFor="let order of listOfOrders">
+		<div *ngIf="order.length == 3; else isTakeAwayOrder">
+			<div
+				class="card"
+				style="width: 18rem">
+				<div class="card-header">Order #{{ order[0] }}</div>
+				<div class="card-body">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Table: {{ order[1] }}</li>
+					</ul>
+					<hr />
+					<div
+						class="btn-group"
+						role="group">
+						<input
+							type="radio"
+							class="btn-check"
+							name="btnradio{{ order[0] }}"
+							id="btnradio1{{ order[0] }}"
+							autocomplete="off"
+							checked />
+						<label
+							class="btn btn-outline-primary"
+							for="btnradio1{{ order[0] }}"
+							>Radio 1</label
+						>
+
+						<input
+							type="radio"
+							class="btn-check"
+							name="btnradio{{ order[0] }}"
+							id="btnradio2{{ order[0] }}"
+							autocomplete="off" />
+						<label
+							class="btn btn-outline-primary"
+							for="btnradio2{{ order[0] }}"
+							>Radio 2</label
+						>
+
+						<input
+							type="radio"
+							class="btn-check"
+							name="btnradio{{ order[0] }}"
+							id="btnradio3{{ order[0] }}"
+							autocomplete="off" />
+						<label
+							class="btn btn-outline-primary"
+							for="btnradio3{{ order[0] }}"
+							>Radio 3</label
+						>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ng-template #isTakeAwayOrder>
+			<p>Is TakeAway Order: {{ order }}</p>
+		</ng-template>
+	</div>
+</div>
