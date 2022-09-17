@@ -1,6 +1,20 @@
-.main-div{
-    width: 100%;
-    height: 100%;
+@import url("https://fonts.googleapis.com/css2?family=Changa+One&display=swap");
 
-    background-color: lightcoral;
+:host {
+	--height-header-div: 50px;
+}
+.main-div {
+	width: 100%;
+	height: 100%;
+
+	background-color: black;
+}
+
+.container-title {
+	height: var(--height-header-div);
+	line-height: var(--height-header-div);
+
+	color: white;
+	font-family: "Changa One", cursive;
+	font-size: xx-large;
 }
