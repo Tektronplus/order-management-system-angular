@@ -1,5 +1,6 @@
 export class LocalOrder {
 	id: number;
+	status: number = 1;
 	numberTable: string;
 	pizzasOrdered: Array<any>;
 

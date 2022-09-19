@@ -27,4 +27,13 @@ export class OrderCardComponent implements OnInit, OnChanges {
 	ngOnChanges(changes: SimpleChanges): void {
 		this.isInstanceOfLocalOrder = this.order instanceof LocalOrder;
 	}
+
+	updateStatus() {
+		let index = OrderedPizzas.orderedPizzas
+			.map(function (e) {
+				return e.id;
+			})
+			.indexOf(this.order.id);
+		OrderedPizzas.orderedPizzas[index].status += 1;
+	}
 }

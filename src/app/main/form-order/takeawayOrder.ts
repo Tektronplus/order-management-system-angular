@@ -1,5 +1,6 @@
 export class TakeAwayOrder {
 	id: number;
+	status: number = 1;
 	firstNameClient: string;
 	lastNameClient: string;
 	addressClient: string;
