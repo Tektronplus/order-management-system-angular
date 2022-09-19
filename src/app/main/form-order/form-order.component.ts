@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { OrderedPizzas } from '../global-variables/ordered-pizzas';
 import { LocalOrder } from './localOrder';
 import { TakeAwayOrder } from './takeawayOrder';
 
@@ -8,8 +9,6 @@ import { TakeAwayOrder } from './takeawayOrder';
 	styleUrls: ['./form-order.component.css'],
 })
 export class FormOrderComponent implements OnInit {
-	@Output() orderForm = new EventEmitter(); //To send data to Parent
-
 	constructor() {}
 	ngOnInit(): void {}
 
@@ -83,7 +82,8 @@ export class FormOrderComponent implements OnInit {
 					this.orderedPizzasList
 				);
 			}
-			this.orderForm.emit(orderObj);
+
+			OrderedPizzas.orderedPizzas.push(orderObj);
 			this.cleanForm();
 		} else {
 			window.alert('Order form incomplete!');

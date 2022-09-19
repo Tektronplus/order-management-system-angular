@@ -1,0 +1,48 @@
+<div
+	class="card"
+	style="width: 18rem">
+	<!-- Order ID -->
+	<div class="card-header">Order #{{ order.id }}</div>
+
+	<!-- Data of client: local client or Takwaway order -->
+	<div *ngIf="isInstanceOfLocalOrder; else isTakeAwayOrder">
+		<ul class="list-group">
+			<li class="list-group-item">Table: {{ order.numberTable }}</li>
+		</ul>
+	</div>
+	<ng-template #isTakeAwayOrder>
+		<ul class="list-group">
+			<li class="list-group-item">First name: {{ order.firstNameClient }}</li>
+			<li class="list-group-item">Last name: {{ order.lastNameClient }}</li>
+			<li class="list-group-item">Address: {{ order.addressClient }}</li>
+			<li class="list-group-item">
+				Phone Number: {{ order.phoneNumberClient }}
+			</li>
+		</ul>
+	</ng-template>
+
+	<!-- List of pizzas ordered -->
+	<div>
+		<ul class="list-group">
+			<li
+				*ngFor="let pizza of order.pizzasOrdered"
+				class="list-group-item">
+				{{ pizza[0] }} {{ pizza[1] }}€ n°{{ pizza[2] }}
+			</li>
+		</ul>
+	</div>
+
+	<!-- Button of Card -->
+	<div>
+		<button
+			type="button"
+			class="btn btn-primary">
+			Status
+		</button>
+		<button
+			type="button"
+			class="btn btn-outline-danger">
+			Delete
+		</button>
+	</div>
+</div>

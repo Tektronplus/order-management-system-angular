@@ -3,7 +3,7 @@ export class TakeAwayOrder {
 	firstNameClient: string;
 	lastNameClient: string;
 	addressClient: string;
-	phoneNumber: string;
+	phoneNumberClient: string;
 	pizzasOrdered: Array<any>;
 
 	constructor(
@@ -11,14 +11,14 @@ export class TakeAwayOrder {
 		firstNameClient,
 		lastNameClient,
 		addressClient,
-		phoneNumber,
+		phoneNumberClient,
 		pizzasOrdered
 	) {
 		this.id = id;
 		this.firstNameClient = firstNameClient;
 		this.lastNameClient = lastNameClient;
 		this.addressClient = addressClient;
-		this.phoneNumber = phoneNumber;
+		this.phoneNumberClient = phoneNumberClient;
 		this.pizzasOrdered = pizzasOrdered;
 	}
 }
