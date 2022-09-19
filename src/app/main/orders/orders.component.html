@@ -1,25 +1,31 @@
 <div>
 	<h2>Order received</h2>
-	<div *ngFor="let order of orderedPizzasArray">
-		<app-order-card
-			*ngIf="order.status === 1"
-			[order]="order"></app-order-card>
+	<div [ngClass]="containerOrdersCSS">
+		<div *ngFor="let order of orderedPizzasArray">
+			<app-order-card
+				*ngIf="order.status === 1"
+				[order]="order"></app-order-card>
+		</div>
 	</div>
 	<hr />
 
 	<h2>Order to prepare</h2>
-	<div *ngFor="let order of orderedPizzasArray">
-		<app-order-card
-			*ngIf="order.status == 2"
-			[order]="order"></app-order-card>
+	<div [ngClass]="containerOrdersCSS">
+		<div *ngFor="let order of orderedPizzasArray">
+			<app-order-card
+				*ngIf="order.status == 2"
+				[order]="order"></app-order-card>
+		</div>
 	</div>
 	<hr />
 
 	<h2>Order on delivery</h2>
-	<div *ngFor="let order of orderedPizzasArray">
-		<app-order-card
-			*ngIf="order.status == 3"
-			[order]="order"></app-order-card>
+	<div [ngClass]="containerOrdersCSS">
+		<div *ngFor="let order of orderedPizzasArray">
+			<app-order-card
+				*ngIf="order.status == 3"
+				[order]="order"></app-order-card>
+		</div>
 	</div>
 	<hr />
 </div>

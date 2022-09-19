@@ -9,6 +9,12 @@
 	row-gap: 10px;
 }
 
+.buttons-container {
+	display: flex;
+	justify-content: space-around;
+	gap: 30px;
+}
+
 #order-pizza {
 	max-width: 500px;
 

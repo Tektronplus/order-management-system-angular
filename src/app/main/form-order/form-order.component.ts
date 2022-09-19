@@ -131,6 +131,14 @@ export class FormOrderComponent implements OnInit {
 		this.resetselectTable = [this.resetselectTable[0] + 1]; //To reset table number
 	}
 
+	resetOrder() {
+		let confirmReset: boolean = confirm('Are you sure to reset form?');
+		console.log(confirmReset);
+		if (confirmReset) {
+			this.cleanForm();
+		}
+	}
+
 	/* 
 		PLACEHOLDER DATABASE: 
 		these are the fake data to use during development

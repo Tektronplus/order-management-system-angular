@@ -26,53 +26,80 @@
         -->
 		<div *ngIf="!isTakeAway; else isTakeAwayComponent">
 			<!--Local order-->
-			<select
-				*ngFor="let selectTable of resetselectTable"
-				class="form-select"
-				(change)="setNumberTable($event)">
-				<option selected>Select the table</option>
-				<option
-					*ngFor="let table of tablesDB"
-					value="{{ table }}">
-					{{ table }}
-				</option>
-			</select>
+			<div class="input-group">
+				<span class="input-group-text"><i class="fa-solid fa-chair"></i></span>
+				<select
+					*ngFor="let selectTable of resetselectTable"
+					class="form-select"
+					(change)="setNumberTable($event)">
+					<option selected>Select the table</option>
+					<option
+						*ngFor="let table of tablesDB"
+						value="{{ table }}">
+						{{ table }}
+					</option>
+				</select>
+			</div>
 		</div>
 
 		<!--Take-away order-->
 		<ng-template #isTakeAwayComponent>
 			<div class="container-client-data">
-				<div>
-					<input
-						type="text"
-						class="form-control"
-						placeholder="First name"
-						(change)="setFirstNameClient($event)"
-						[value]="firstNameClient" />
+				<div class="input-group mb-3">
+					<span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+					<div class="form-floating">
+						<input
+							type="text"
+							class="form-control"
+							id="floatingInputGroup1"
+							placeholder="Username"
+							(change)="setFirstNameClient($event)"
+							[value]="firstNameClient" />
+						<label for="floatingInputGroup1">First Name</label>
+					</div>
 				</div>
-				<div>
-					<input
-						type="text"
-						class="form-control"
-						placeholder="Last name"
-						(change)="setLastNameClient($event)"
-						[value]="lastNameClient" />
+				<div class="input-group mb-3">
+					<span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+					<div class="form-floating">
+						<input
+							type="text"
+							class="form-control"
+							id="floatingInputGroup1"
+							placeholder="Username"
+							(change)="setLastNameClient($event)"
+							[value]="lastNameClient" />
+						<label for="floatingInputGroup1">Last Name</label>
+					</div>
 				</div>
-				<div>
-					<input
-						type="text"
-						class="form-control"
-						placeholder="Address"
-						(change)="setAddressClient($event)"
-						[value]="addressClient" />
+				<div class="input-group mb-3">
+					<span class="input-group-text"
+						><i class="fa-solid fa-location-dot"> </i>
+					</span>
+					<div class="form-floating">
+						<input
+							type="text"
+							class="form-control"
+							id="floatingInputGroup1"
+							placeholder="Username"
+							(change)="setAddressClient($event)"
+							[value]="addressClient" />
+						<label for="floatingInputGroup1">Address</label>
+					</div>
 				</div>
-				<div>
-					<input
-						type="text"
-						class="form-control"
-						placeholder="Phone number"
-						(change)="setPhoneNumberClient($event)"
-						[value]="phoneNumberClient" />
+				<div class="input-group mb-3">
+					<span class="input-group-text"
+						><i class="fa-solid fa-phone"></i
+					></span>
+					<div class="form-floating">
+						<input
+							type="text"
+							class="form-control"
+							id="floatingInputGroup1"
+							placeholder="Username"
+							(change)="setPhoneNumberClient($event)"
+							[value]="phoneNumberClient" />
+						<label for="floatingInputGroup1">Phone Number</label>
+					</div>
 				</div>
 			</div>
 		</ng-template>
@@ -81,35 +108,33 @@
 	<hr />
 
 	<div>
-		<!--Button to add new pizza in the order-->
-		<button
-			type="button"
-			class="btn btn-primary"
-			(click)="addOrderForm()">
-			Add pizza
-		</button>
-
 		<!--Add new field for pizza information-->
 		<div
 			id="order-pizza"
 			class="my-3"
 			*ngFor="let orderForm of orderedPizzasList; let indexOrderForm = index">
 			<!--List of pizzas-->
-			<select
-				class="form-select"
-				style="grid-area: select-pizza"
-				(change)="changePizza($event, indexOrderForm)">
-				<option selected>Select pizza</option>
-				<option
-					*ngFor="let pizza of pizzasDB"
-					value="{{ pizza[1] }}">
-					{{ pizza[0] }}
-				</option>
-			</select>
+			<div class="input-group">
+				<span class="input-group-text"
+					><i class="fa-solid fa-pizza-slice"></i
+				></span>
+				<select
+					class="form-control"
+					style="grid-area: select-pizza"
+					(change)="changePizza($event, indexOrderForm)">
+					<option selected>Select pizza</option>
+					<option
+						*ngFor="let pizza of pizzasDB"
+						value="{{ pizza[1] }}">
+						{{ pizza[0] }}
+					</option>
+				</select>
+			</div>
 
 			<!--Quantity of pizza-->
 			<input
 				style="grid-area: quantity-pizza"
+				class="border rounded"
 				type="number"
 				min="1"
 				max="10"
@@ -122,18 +147,36 @@
 				type="button"
 				class="btn btn-outline-danger"
 				(click)="deleteOrderForm(indexOrderForm)">
-				Delete
+				<i class="fa-solid fa-trash"></i>
 			</button>
 		</div>
 
-		<hr />
-
-		<!--Send order button-->
+		<!--Button to add new pizza in the order-->
 		<button
 			type="button"
-			class="btn btn-success"
-			(click)="sendOrder()">
-			Send Order
+			class="btn btn-outline-primary"
+			style="width: 100%"
+			(click)="addOrderForm()">
+			<i class="fa-solid fa-plus"></i>
 		</button>
+
+		<hr />
+
+		<!--Send & Reset order button-->
+		<div class="buttons-container">
+			<button
+				type="button"
+				class="btn btn-success"
+				style="flex-grow: 3"
+				(click)="sendOrder()">
+				<i class="fa-solid fa-check"></i>
+			</button>
+			<button
+				class="btn btn-warning"
+				style="flex-grow: 1"
+				(click)="resetOrder()">
+				<i class="fa-solid fa-rotate-right"></i>
+			</button>
+		</div>
 	</div>
 </div>
