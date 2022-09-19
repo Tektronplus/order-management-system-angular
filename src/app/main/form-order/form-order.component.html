@@ -6,20 +6,41 @@
             To change form:
                 - true: when is take-away order
                 - false: when is local order
-        -->
-		<div class="form-check form-switch">
+		-->
+		<div
+			class="btn-group"
+			style="width: 100%"
+			role="group"
+			aria-label="Basic radio toggle button group">
 			<input
-				class="form-check-input"
-				type="checkbox"
-				role="switch"
-				id="flexSwitchCheckDefault"
+				type="radio"
+				class="btn-check"
+				name="btnradio"
+				id="btnradio1"
+				autocomplete="off"
+				(change)="setIsTakeAway()"
+				checked />
+			<label
+				class="btn btn-outline-primary"
+				for="btnradio1"
+				>Local Order</label
+			>
+
+			<input
+				type="radio"
+				class="btn-check"
+				name="btnradio"
+				id="btnradio3"
+				autocomplete="off"
 				(change)="setIsTakeAway()" />
 			<label
-				class="form-check-label"
-				for="flexSwitchCheckDefault">
-				Take away
-			</label>
+				class="btn btn-outline-primary"
+				for="btnradio3"
+				>Take-away Order</label
+			>
 		</div>
+
+		<hr />
 
 		<!-- 
             The two components that change based on the state of the Boolean "isTakeAway"
