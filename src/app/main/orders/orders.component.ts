@@ -13,7 +13,7 @@ export class OrdersComponent implements OnInit {
 	ngOnInit(): void {}
 
 	get orderedPizzasArray() {
-		//TEST object
+		/*TEST object
 		let testOrder = {
 			id: 1,
 			status: 1,
@@ -21,7 +21,17 @@ export class OrdersComponent implements OnInit {
 			lastNameClient: 'Bianchi',
 			addressClient: 'via Italia, 12',
 			phoneNumberClient: '390 439 4324',
-			pizzasOrdered: [['Test', 10, 2]],
+			pizzasOrdered: [
+				['Test', 10, 2],
+				['Test', 10, 2],
+				['Test', 10, 2],
+				['Test', 10, 2],
+				['Test', 10, 2],
+				['Test', 10, 2],
+				['Test', 10, 2],
+				['Test', 10, 2],
+				['Test', 10, 2],
+			],
 		};
 		let myTestArray = [];
 		for (let i = 1; i <= 30; i++) {
@@ -31,7 +41,7 @@ export class OrdersComponent implements OnInit {
 		}
 		return myTestArray;
 
-		//return OrderedPizzas.orderedPizzas;
+		*/ return OrderedPizzas.orderedPizzas;
 	}
 
 	/* CSS variables */

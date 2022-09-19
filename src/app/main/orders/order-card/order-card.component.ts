@@ -16,11 +16,16 @@ import { OrderedPizzas } from '../../global-variables/ordered-pizzas';
 })
 export class OrderCardComponent implements OnInit, OnChanges {
 	@Input() order = null;
+	totQuantityPizzas: number = 0;
+	totImportPizzas: any = 0;
 
 	constructor() {}
 	ngOnInit(): void {
-		console.log(this.order);
-		console.log(this.isInstanceOfLocalOrder);
+		for (let pizza of this.order.pizzasOrdered) {
+			this.totQuantityPizzas += pizza[2];
+			this.totImportPizzas += pizza[1];
+		}
+		this.totImportPizzas = parseFloat(this.totImportPizzas).toFixed(2);
 	}
 
 	isInstanceOfLocalOrder: boolean;
@@ -47,5 +52,9 @@ export class OrderCardComponent implements OnInit, OnChanges {
 	deleteOrder() {
 		let index = this.getIndexOrder();
 		OrderedPizzas.orderedPizzas.splice(index, 1);
+	}
+
+	pricePizza(price) {
+		return parseFloat(price).toFixed(2);
 	}
 }

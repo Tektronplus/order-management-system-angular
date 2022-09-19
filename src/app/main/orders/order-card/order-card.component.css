@@ -1,0 +1,12 @@
+.list-pizza {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.buttons-container {
+	padding: 10px;
+	display: flex;
+	justify-content: space-around;
+	gap: 10px;
+}

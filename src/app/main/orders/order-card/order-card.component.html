@@ -1,5 +1,5 @@
 <div
-	class="card"
+	class="card shadow-sm"
 	style="width: 18rem">
 	<!-- Order ID -->
 	<div class="card-header">Order #{{ order.id }}</div>
@@ -11,40 +11,61 @@
 		</ul>
 	</div>
 	<ng-template #isTakeAwayOrder>
-		<ul class="list-group">
-			<li class="list-group-item">First name: {{ order.firstNameClient }}</li>
-			<li class="list-group-item">Last name: {{ order.lastNameClient }}</li>
-			<li class="list-group-item">Address: {{ order.addressClient }}</li>
+		<ul class="list-group list-group-flush">
 			<li class="list-group-item">
-				Phone Number: {{ order.phoneNumberClient }}
+				<i class="fa-solid fa-user"></i> {{ order.firstNameClient }}
+				{{ order.lastNameClient }}
+			</li>
+			<li class="list-group-item">
+				<i class="fa-solid fa-location-dot"></i> {{ order.addressClient }}
+			</li>
+			<li class="list-group-item">
+				<i class="fa-solid fa-phone"></i> {{ order.phoneNumberClient }}
 			</li>
 		</ul>
 	</ng-template>
 
 	<!-- List of pizzas ordered -->
-	<div>
-		<ul class="list-group">
+	<div class="my-3">
+		<ul class="list-group list-group-flush">
+			<li
+				class="list-group-item list-pizza"
+				style="font-weight: bold">
+				<span><i class="fa-solid fa-pizza-slice"></i></span
+				><span><i class="fa-solid fa-hashtag"></i></span
+				><span><i class="fa-solid fa-euro-sign"></i></span>
+			</li>
 			<li
 				*ngFor="let pizza of order.pizzasOrdered"
-				class="list-group-item">
-				{{ pizza[0] }} {{ pizza[1] }}€ n°{{ pizza[2] }}
+				class="list-group-item list-pizza">
+				<span>{{ pizza[0] }}</span
+				><span># {{ pizza[2] }}</span
+				><span>{{ pricePizza(pizza[1]) }}€</span>
+			</li>
+			<li
+				class="list-group-item list-pizza"
+				style="font-weight: bold">
+				<span>TOT</span><span># {{ totQuantityPizzas }}</span
+				><span>{{ totImportPizzas }}€</span>
 			</li>
 		</ul>
 	</div>
 
 	<!-- Button of Card -->
-	<div>
+	<div class="buttons-container">
 		<button
 			type="button"
 			class="btn btn-primary"
+			style="flex-grow: 5"
 			(click)="updateStatusOrder()">
 			Status
 		</button>
 		<button
 			type="button"
 			class="btn btn-outline-danger"
+			style="flex-grow: 1"
 			(click)="deleteOrder()">
-			Delete
+			<i class="fa-solid fa-trash"></i>
 		</button>
 	</div>
 </div>
