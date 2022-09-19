@@ -27,6 +27,7 @@
 		<div *ngIf="!isTakeAway; else isTakeAwayComponent">
 			<!--Local order-->
 			<select
+				*ngFor="let selectTable of resetselectTable"
 				class="form-select"
 				(change)="setNumberTable($event)">
 				<option selected>Select the table</option>

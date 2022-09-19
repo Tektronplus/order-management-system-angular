@@ -120,6 +120,7 @@ export class FormOrderComponent implements OnInit {
 		return isListIncorrect;
 	}
 
+	resetselectTable = [1]; //Var to reset the "select" tag of table number
 	cleanForm() {
 		this.numberTable = '';
 		this.firstNameClient = '';
@@ -127,6 +128,7 @@ export class FormOrderComponent implements OnInit {
 		this.addressClient = '';
 		this.phoneNumberClient = '';
 		this.orderedPizzasList = [['new Pizza', 0, 1]];
+		this.resetselectTable = [this.resetselectTable[0] + 1]; //To reset table number
 	}
 
 	/* 

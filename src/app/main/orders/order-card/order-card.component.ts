@@ -28,12 +28,24 @@ export class OrderCardComponent implements OnInit, OnChanges {
 		this.isInstanceOfLocalOrder = this.order instanceof LocalOrder;
 	}
 
-	updateStatus() {
-		let index = OrderedPizzas.orderedPizzas
+	/* METHODS */
+	getIndexOrder(): number {
+		let index;
+		index = OrderedPizzas.orderedPizzas
 			.map(function (e) {
 				return e.id;
 			})
 			.indexOf(this.order.id);
+		return index;
+	}
+
+	updateStatusOrder() {
+		let index = this.getIndexOrder();
 		OrderedPizzas.orderedPizzas[index].status += 1;
+	}
+
+	deleteOrder() {
+		let index = this.getIndexOrder();
+		OrderedPizzas.orderedPizzas.splice(index, 1);
 	}
 }
