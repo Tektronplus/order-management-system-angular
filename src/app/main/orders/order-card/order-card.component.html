@@ -5,22 +5,36 @@
 	<div class="card-header">Order #{{ order.id }}</div>
 
 	<!-- Data of client: local client or Takwaway order -->
-	<div *ngIf="isInstanceOfLocalOrder; else isTakeAwayOrder">
-		<ul class="list-group">
-			<li class="list-group-item">Table: {{ order.numberTable }}</li>
+	<div
+		*ngIf="
+			isInstanceOfLocalOrder;
+			then isLocalOrder;
+			else isTakeAwayOrder
+		"></div>
+
+	<ng-template #isLocalOrder>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item">
+				<i class="fa-solid fa-chair"></i>
+				{{ order.numberTable }}
+			</li>
 		</ul>
-	</div>
+	</ng-template>
+
 	<ng-template #isTakeAwayOrder>
 		<ul class="list-group list-group-flush">
 			<li class="list-group-item">
-				<i class="fa-solid fa-user"></i> {{ order.firstNameClient }}
+				<i class="fa-solid fa-user"></i>
+				{{ order.firstNameClient }}
 				{{ order.lastNameClient }}
 			</li>
 			<li class="list-group-item">
-				<i class="fa-solid fa-location-dot"></i> {{ order.addressClient }}
+				<i class="fa-solid fa-location-dot"></i>
+				{{ order.addressClient }}
 			</li>
 			<li class="list-group-item">
-				<i class="fa-solid fa-phone"></i> {{ order.phoneNumberClient }}
+				<i class="fa-solid fa-phone"></i>
+				{{ order.phoneNumberClient }}
 			</li>
 		</ul>
 	</ng-template>
@@ -31,22 +45,35 @@
 			<li
 				class="list-group-item list-pizza"
 				style="font-weight: bold">
-				<span><i class="fa-solid fa-pizza-slice"></i></span
-				><span><i class="fa-solid fa-hashtag"></i></span
-				><span><i class="fa-solid fa-euro-sign"></i></span>
+				<span
+					class="span-fs"
+					style="grid-area: name">
+					<i class="fa-solid fa-pizza-slice"></i>
+				</span>
+				<span
+					class="span-c"
+					style="grid-area: quantity">
+					<i class="fa-solid fa-hashtag"></i>
+				</span>
+				<span
+					class="span-c"
+					style="grid-area: price">
+					<i class="fa-solid fa-euro-sign"></i>
+				</span>
 			</li>
 			<li
 				*ngFor="let pizza of order.pizzasOrdered"
 				class="list-group-item list-pizza">
-				<span>{{ pizza[0] }}</span
-				><span># {{ pizza[2] }}</span
-				><span>{{ pricePizza(pizza[1]) }}€</span>
+				<span class="span-fs">{{ pizza[0] }}</span>
+				<span class="span-c"># {{ pizza[2] }}</span>
+				<span class="span-fe">{{ pricePizza(pizza[1]) }}€</span>
 			</li>
 			<li
 				class="list-group-item list-pizza"
 				style="font-weight: bold">
-				<span>TOT</span><span># {{ totQuantityPizzas }}</span
-				><span>{{ totImportPizzas }}€</span>
+				<span class="span-fs">TOT</span>
+				<span class="span-c"># {{ totQuantityPizzas }}</span>
+				<span class="span-fe">{{ totImportPizzas }}€</span>
 			</li>
 		</ul>
 	</div>
@@ -56,13 +83,15 @@
 		<button
 			type="button"
 			class="btn btn-primary"
+			[attr.disabled]="order.status >= 4 ? '' : null"
 			style="flex-grow: 5"
 			(click)="updateStatusOrder()">
-			Status
+			{{ statusButtonLabel() }}
 		</button>
 		<button
 			type="button"
 			class="btn btn-outline-danger"
+			[attr.disabled]="order.status >= 2 ? '' : null"
 			style="flex-grow: 1"
 			(click)="deleteOrder()">
 			<i class="fa-solid fa-trash"></i>

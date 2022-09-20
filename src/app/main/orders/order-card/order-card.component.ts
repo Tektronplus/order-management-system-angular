@@ -6,7 +6,6 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import { LocalOrder } from '../../form-order/localOrder';
-import { TakeAwayOrder } from '../../form-order/takeawayOrder';
 import { OrderedPizzas } from '../../global-variables/ordered-pizzas';
 
 @Component({
@@ -22,8 +21,8 @@ export class OrderCardComponent implements OnInit, OnChanges {
 	constructor() {}
 	ngOnInit(): void {
 		for (let pizza of this.order.pizzasOrdered) {
+			this.totImportPizzas += pizza[1] * pizza[2];
 			this.totQuantityPizzas += pizza[2];
-			this.totImportPizzas += pizza[1];
 		}
 		this.totImportPizzas = parseFloat(this.totImportPizzas).toFixed(2);
 	}
@@ -32,6 +31,8 @@ export class OrderCardComponent implements OnInit, OnChanges {
 	ngOnChanges(changes: SimpleChanges): void {
 		this.isInstanceOfLocalOrder = this.order instanceof LocalOrder;
 	}
+
+	/* VARIABLES */
 
 	/* METHODS */
 	getIndexOrder(): number {
@@ -47,6 +48,25 @@ export class OrderCardComponent implements OnInit, OnChanges {
 	updateStatusOrder() {
 		let index = this.getIndexOrder();
 		OrderedPizzas.orderedPizzas[index].status += 1;
+	}
+
+	statusButtonLabel(): string {
+		let statusOrderLabel: string = '';
+		switch (this.order.status) {
+			case 1:
+				statusOrderLabel = 'Order received';
+				break;
+			case 2:
+				statusOrderLabel = 'Order is ready';
+				break;
+			case 3:
+				statusOrderLabel = 'Order delivered';
+				break;
+			default:
+				statusOrderLabel = 'Order delivered';
+				break;
+		}
+		return statusOrderLabel;
 	}
 
 	deleteOrder() {

@@ -1,7 +1,7 @@
 .list-pizza {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: 4fr 1fr 2fr;
+	grid-template-areas: "name quantity price";
 }
 
 .buttons-container {
@@ -9,4 +9,19 @@
 	display: flex;
 	justify-content: space-around;
 	gap: 10px;
+}
+
+.span-c {
+	display: flex;
+	justify-content: center;
+}
+
+.span-fs {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.span-fe {
+	display: flex;
+	justify-content: flex-end;
 }
